@@ -39,6 +39,14 @@ type graphQLEndpoint struct {
 	*api.DefaultEndpointHandler
 }
 
+func (e *graphQLEndpoint) HandleOPTIONS(w http.ResponseWriter, r *http.Request, resources []string) {
+	w.Header().Set("Access-Control-Allow-Origin", "*");
+	w.Header().Set("Access-Control-Allow-Headers","*");
+	w.Header().Set("Access-Control-Allow-Methods", "POST, GET, PUT, DELETE, OPTIONS");
+	w.Header().Set("Content-Length","0");
+	w.Header().Set("Content-Type","text/plain");
+}
+
 /*
 HandlePOST handles GraphQL queries.
 */
@@ -80,6 +88,7 @@ func (e *graphQLEndpoint) HandlePOST(w http.ResponseWriter, r *http.Request, res
 		return
 	}
 
+	w.Header().Set("Access-Control-Allow-Origin", "*");
 	w.Header().Set("content-type", "application/json; charset=utf-8")
 	json.NewEncoder(w).Encode(res)
 }

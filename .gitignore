@@ -16,3 +16,7 @@
 /examples/data-mining/docker-images/eliasdb/eliasdb
 /examples/data-mining/docker-images/frontend/app/node_modules
 /examples/data-mining/docker-images/frontend/app/graphiql
+/db
+eliasdb.config.json
+/ssl
+/web

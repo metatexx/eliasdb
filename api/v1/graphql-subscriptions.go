@@ -62,6 +62,7 @@ func (e *graphQLSubscriptionsEndpoint) HandleGET(w http.ResponseWriter, r *http.
 	// Update the incomming connection to a websocket
 	// If the upgrade fails then the client gets an HTTP error response.
 
+	upgrader.CheckOrigin = func(r *http.Request) bool { return true }
 	conn, err := upgrader.Upgrade(w, r, nil)
 
 	// Websocket connections support one concurrent reader and one concurrent writer.

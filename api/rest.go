@@ -65,6 +65,11 @@ type RestEndpointHandler interface {
 	HandleGET(w http.ResponseWriter, r *http.Request, resources []string)
 
 	/*
+		HandleOPTIONS handles a OPTIONS request.
+	*/
+	HandleOPTIONS(w http.ResponseWriter, r *http.Request, resources []string)
+
+	/*
 		HandlePOST handles a POST request.
 	*/
 	HandlePOST(w http.ResponseWriter, r *http.Request, resources []string)
@@ -161,6 +166,9 @@ func RegisterRestEndpoints(endpointInsts map[string]RestEndpointInst) {
 				case "GET":
 					handler.HandleGET(w, r, resources)
 
+				case "OPTIONS":
+					handler.HandleOPTIONS(w, r, resources)
+
 				case "POST":
 					handler.HandlePOST(w, r, resources)
 
@@ -188,6 +196,13 @@ type DefaultEndpointHandler struct {
 HandleGET is a method stub returning an error.
 */
 func (de *DefaultEndpointHandler) HandleGET(w http.ResponseWriter, r *http.Request, resources []string) {
+	http.Error(w, "Method Not Allowed", http.StatusMethodNotAllowed)
+}
+
+/*
+HandleOPTIONS is a method stub returning an error.
+*/
+func (de *DefaultEndpointHandler) HandleOPTIONS(w http.ResponseWriter, r *http.Request, resources []string) {
 	http.Error(w, "Method Not Allowed", http.StatusMethodNotAllowed)
 }
 
